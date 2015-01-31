@@ -14,3 +14,23 @@ def readCSV(filename):
 
 
 ### enter your code below
+def get_avg_latlng(filename):
+	lines = readCSV(filename)
+	sum_lat = 0
+	sum_lng = 0
+	for i in lines:
+		if (i[-3] == ""):
+			continue
+		if (i[27] == "NJ"):
+			continue
+		sum_lat = sum_lat + float(i[-3])
+		sum_lng = sum_lng + float(i[-2])
+
+	avg_lat = sum_lat / float(len(lines) - 3)
+	avg_lng = sum_lng / float(len(lines) - 3)
+
+	print ("average latitude: ", avg_lat, "average longitude: ", avg_lng)
+if __name__ == '__main__':
+	get_avg_latlng("permits_hydepark.csv")
+
+
