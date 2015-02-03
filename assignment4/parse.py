@@ -30,7 +30,40 @@ def get_avg_latlng(filename):
 	avg_lng = sum_lng / float(len(lines) - 3)
 
 	print ("average latitude: ", avg_lat, "average longitude: ", avg_lng)
-if __name__ == '__main__':
+#if __name__ == '__main__':
+	#get_avg_latlng("permits_hydepark.csv")
+
+
+import Image 
+#import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt 
+
+def zip_code_barchart(filename):
+	lines = readCSV(filename)
+	zipcodes = []
+	for i in lines:
+		if (i[28] == ""):
+			continue
+		if (i[27] == "NJ"): #filtering out null data and NJ contractors
+			continue
+		else:
+			zi = i[28][0:5]
+		zipcode = int (zi)
+		zipcodes.append(zipcode)
+
+	plt.hist(zipcodes, bins=100)
+	plt.title('Zipcode Histogram')
+	plt.xlabel('Contractor Zipcodes')
+	plt.ylabel('Frequency')
+	plt.grid(True)
+	plt.draw()
+	plt.savefig('histogram.png')
+	Image.open('histogram.png').save('histogram.jpg', 'JPEG')
+
+
+if sys.argv[1] == 'latlong':
 	get_avg_latlng("permits_hydepark.csv")
+elif sys.argv[1] == 'hist':
+	zip_code_barchart("permits_hydepark.csv")
 
 
