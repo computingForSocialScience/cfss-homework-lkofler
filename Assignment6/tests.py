@@ -44,6 +44,10 @@ def testDegree():
     df = readEdgeList('testEdgeList.csv')
 
     # the seed artis id should have exactly 20 out-edges
+    x=degree(df,'out')
+    print(x)
+    print(x.index)
+    print(x.shape)
     assert degree(df,'out')['4EF5vIcCYKMM61oYOG2Tqa'] == 20
 
 
